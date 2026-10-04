@@ -4,7 +4,9 @@ import com.example.orderservice.client.CatalogClient;
 import com.example.orderservice.client.dto.ProductResponse;
 import com.example.orderservice.model.PurchaseOrder;
 import com.example.orderservice.repository.PurchaseOrderRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,5 +31,14 @@ public class PurchaseOrderService {
 
     public ProductResponse testCatalogConnection(Long productId) {
         return catalogClient.getProductById(productId);
+    }
+
+    public ProductResponse getProductForOrder(Long orderId) {
+        PurchaseOrder order = repository.findById(orderId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Order not found"
+                ));
+        return catalogClient.getProductById(order.getProductId());
     }
 }
