@@ -1,5 +1,6 @@
 package com.example.orderservice.controller;
 
+import com.example.orderservice.client.dto.ProductResponse;
 import com.example.orderservice.model.PurchaseOrder;
 import com.example.orderservice.repository.PurchaseOrderRepository;
 import com.example.orderservice.service.PurchaseOrderService;
@@ -31,7 +32,7 @@ public class PurchaseOrderController {
     }
 
     @GetMapping("/test-catalog/{productId}")
-    public String testCatalogConnection(@PathVariable Long productId) {
+    public ProductResponse testCatalogConnection(@PathVariable Long productId) {
         return service.testCatalogConnection(productId);
     }
 }

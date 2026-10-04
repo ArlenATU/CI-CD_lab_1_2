@@ -1,6 +1,7 @@
 package com.example.orderservice.service;
 
 import com.example.orderservice.client.CatalogClient;
+import com.example.orderservice.client.dto.ProductResponse;
 import com.example.orderservice.model.PurchaseOrder;
 import com.example.orderservice.repository.PurchaseOrderRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class PurchaseOrderService {
         return repository.save(order);
     }
 
-    public String testCatalogConnection(Long productId) {
+    public ProductResponse testCatalogConnection(Long productId) {
         return catalogClient.getProductById(productId);
     }
 }
